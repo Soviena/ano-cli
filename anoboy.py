@@ -1,11 +1,12 @@
 import re, scraper, json
+from sys import prefix
 from html import unescape
 base_url = "https://anoboy.live/"
 
 def querySearch(query:str,page:int=1)->dict:
     data = {
         "page": page,
-        "limit": 10,
+        "limit": 21,
         "action": "load_search_movie",
         "keyword": query,
     }
@@ -27,12 +28,16 @@ def iframe(url:str)->str:
     return str(s['fembed']['link']).replace('\\','')
 
 def mp4upload(url:str)->str:
+    print(url)
     s = scraper.parse_web(url)
     garb = s.find('script', text= re.compile("'(\|\|.*?)'"))
     id = re.findall(r'\|([^|]{56})\|',str(garb))[0]
-    return "https://www4.mp4upload.com:282/d/"+id+"/video.mp4"
+    prefix = re.findall(r'\|embed\|(.*?)\|',str(garb))[0]
+    return "https://"+prefix+".mp4upload.com:282/d/"+id+"/video.mp4"
+    # --http-header-fields="Referer: www.mp4upload.com"
 
 def animepl(url:str)->str:
+    print(url)
     v_id = re.findall(r'v\/(.*)',url)[0]
     head = {
         "referer": "https://animepl.xyz",

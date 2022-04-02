@@ -50,7 +50,7 @@ def animepl(url:str)->str:
 
     return json.loads(scraper.api_get('https://animepl.xyz/api/source/'+v_id,headers=head,data=data,post=True).content)['data']
 
-def searchAnime()->str:
+def searchAnime(): # Search for anime and get direct video link from it
     query = input("Cari anime : ")
     animes = querySearch(query)
     for i in range(len(animes['data'])):

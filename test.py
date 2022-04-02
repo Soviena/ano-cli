@@ -1,8 +1,8 @@
-import anoboy
+import anoboyOnline
 import scraper
 
-
-print(anoboy.searchAnime())
+# print(scraper.parse_web("https://uservideo.xyz/file/nanime.princess.connect.redive.s2.01.480p.mp4?embed=true"))
+print(anoboyOnline.searchAnime())
 
 
 # import scraper, re,json
